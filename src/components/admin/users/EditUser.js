@@ -215,7 +215,7 @@ const emailRegex =
           </div>
         </div>
       </form>
-      <Link to={Routes.ADMIN_USERS}>Back to user page</Link>
+      <Link to={Routes.ADMIN_OFFENDER}>Back to user page</Link>
       {error && <div className='alert alert-danger'>{error}</div>}
     </div>
   );

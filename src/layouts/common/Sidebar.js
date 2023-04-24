@@ -1,10 +1,22 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
+import React , {useEffect, useState}from 'react';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../constants';
 import { injectModels } from '../../redux/injectModels';
 
+
 const Sidebar = (props) => {
+
+  const [email,setEmail] = useState();
+
+  const userEmail = () =>{
+   setEmail(localStorage.getItem('email'))
+  }
+
+  useEffect(() => {
+    userEmail()
+  },[])
+
     return (
         <aside className="main-sidebar">
         <section className="sidebar">
@@ -13,7 +25,7 @@ const Sidebar = (props) => {
               <img src="/assets/img/user2-160x160.jpg" className="img-circle" alt="User Image"/>
             </div>
             <div className="pull-left info">
-              <p>Sourav Mishra</p>
+              <p>{email}</p>
               <a href="/#"><i className="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -27,8 +39,8 @@ const Sidebar = (props) => {
            </li>
            <li className="active">
              
-                <NavLink to={Routes.ADMIN_USERS}>
-                <i className="fa fa-users"></i> <span>Cases</span>
+                <NavLink to={Routes.ADMIN_OFFENDER}>
+                <i className="fa fa-users"></i> <span>Offenders</span>
               </NavLink>
            </li> 
           </ul>

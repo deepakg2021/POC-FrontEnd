@@ -18,8 +18,8 @@ function App() {
           <CustomAuthRoute exact  path={Routes.RESET_PASSWORD+"/:token"} component={ResetPassword} />
           <CustomAuthRoute exact  path={Routes.REGISTER} component={Register} />
           <CustomAdminRoute exact path={Routes.DASHBOARD} component={Dashboard} />
-          <CustomAdminRoute exact path={Routes.ADMIN_USERS} component={UsersList} />
-          <CustomAdminRoute exact path={Routes.ADMIN_USERS_ADD} component={AddUser} />
+          <CustomAdminRoute exact path={Routes.ADMIN_OFFENDER} component={UsersList} />
+          <CustomAdminRoute exact path={Routes.ADMIN_OFFENDER_ADD} component={AddUser} />
           <CustomAdminRoute exact path={Routes.ADMIN_USERS_VIEW+"/:user_id"} component={ViewUser} />
           <CustomAdminRoute exact path={Routes.ADMIN_USERS_EDIT+"/:user_id"} component={EditUser} />
           <Route exact path={Routes.ERROR} component={Error} />

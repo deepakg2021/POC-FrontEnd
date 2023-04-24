@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
 
-export const Login = async (data) => { console.log("data", data);
+export const Login = async (data) => { 
     try{
         const response = await axios.post(`http://localhost:5000/api/v1/auth/login`, data, {headers:{"Content-Type":"application/json"}});
         if(response.status === 200) {

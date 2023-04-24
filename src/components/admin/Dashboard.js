@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "../../constants";
-import { getAllCases } from "../../services/AdminService";
+import { getAllCases, getMe } from "../../services/AdminService";
 
 const Dashboard = () => {
   const [allCases, setAllCases] = useState();
@@ -11,6 +11,7 @@ const Dashboard = () => {
     const caseData = cases.data;
     setAllCases(caseData);
   };
+
 
   useEffect(() => {
     getCases();
@@ -45,7 +46,7 @@ const Dashboard = () => {
               <div className="icon">
                 <i className="ion ion-stats-bars"></i>
               </div>
-              <Link to={Routes.ADMIN_USERS} className="small-box-footer">
+              <Link to={Routes.ADMIN_OFFENDER} className="small-box-footer">
                 More info <i className="fa fa-arrow-circle-right"></i>
               </Link>
             </div>
@@ -77,7 +78,7 @@ const Dashboard = () => {
               <div className="icon">
                 <i className="ion ion-person-add"></i>
               </div>
-              <Link to={Routes.ADMIN_USERS_ADD} className="small-box-footer">
+              <Link to={Routes.ADMIN_OFFENDER_ADD} className="small-box-footer">
                 More info <i className="fa fa-arrow-circle-right"></i>
               </Link>
             </div>

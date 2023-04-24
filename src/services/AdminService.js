@@ -31,4 +31,18 @@ export const getAllCases = async () => {
 };
 
 
+export const getMe = async () =>{
+    try{
+        const response = await axios.get(`http://localhost:5000/api/v1/user/getme`, {headers:{"Content-Type":"application/json", "Authorization":"Bearer "+JWT.getJwt()}});
+        if(response.status === 200) {
+            return response.data;  
+        } else {
+            return Promise.reject(new Error("Internal server error"));   
+        }
+    } catch(err){
+        return Promise.reject(err);
+    };
+}
+
+
 

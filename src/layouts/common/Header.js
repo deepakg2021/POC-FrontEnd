@@ -27,14 +27,15 @@ const Header = (props) => {
     }
   };
 
+
+  const userEmail = localStorage.getItem('email')
   const history = useHistory();
 
   return (
     <React.Fragment>
       <header className="main-header">
-        <NavLink to={Routes.ADMIN_USERS} className="logo">
+        <NavLink to={Routes.ADMIN_OFFENDER} className="logo">
           <span className="logo-mini">
-            <b>A</b>LT
           </span>
           <span className="logo-lg">
             <b>POC</b>
@@ -63,7 +64,7 @@ const Header = (props) => {
                     className="user-image"
                     alt="User Image"
                   />
-                  <span className="hidden-xs">Sourav Mishra</span>
+                  <span className="hidden-xs">{userEmail}</span>
                 </Link>
                 <ul className="dropdown-menu">
                   <li className="user-header">
@@ -93,6 +94,7 @@ const Header = (props) => {
                           e.preventDefault();
                           props.auth.logout();
                           history.push(Routes.LOGIN);
+                          localStorage.setItem("email" , "")
                           console.log("Logged out");
                         }}
                       >
