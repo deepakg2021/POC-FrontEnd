@@ -78,7 +78,7 @@ const AddUser = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/add",
+        "http://localhost:5000/api/v1/user/add-cases",
         formData
       );
       console.log(response.data);

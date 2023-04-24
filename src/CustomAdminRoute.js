@@ -7,11 +7,11 @@ import { injectModels } from './redux/injectModels';
 const CustomAdminRoute = ({component:Component, ...rest}) => { 
      return (
         <Route {...rest} render={(props)=>{
-            console.log("props",props)
+       
             return (
                 <React.Fragment>
-                 {/* {rest.auth.isLoggedIn ? <DashboardLayout><Component {...props} /></DashboardLayout> :  <Redirect to={Routes.LOGIN} />} */}
-                 <DashboardLayout><Component {...props} /></DashboardLayout>
+                 {rest.auth.isLoggedIn ? <DashboardLayout><Component {...props} /></DashboardLayout> :  <Redirect to={Routes.LOGIN} />}
+                 {/* <DashboardLayout><Component {...props} /></DashboardLayout> */}
                 </React.Fragment>
             )
         }} />

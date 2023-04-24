@@ -7,7 +7,8 @@ import { Routes } from "../../../constants";
 const emailRegex =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
- const EditUser= () => {
+ const EditUser= (props) => {
+  console.log(props,"props")
   const params = useParams();
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");

@@ -9,4 +9,5 @@ export const routes = {
     ADMIN_USERS_ADD:"/admin/users/add",
     ADMIN_USERS_VIEW:"/admin/users/view",
     ADMIN_USERS_EDIT:"/admin/users/edit",
+    ERROR:"*"
 };

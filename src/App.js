@@ -1,10 +1,12 @@
-import {BrowserRouter as Router, Switch } from 'react-router-dom';
+import {Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAuthRoute from './CustomAuthRoute';
 import CustomAdminRoute from './CustomAdminRoute';
 import { Login, ForgotPassword, Register, ResetPassword } from './components/auth';
 import { Dashboard, UsersList, AddUser, ViewUser, EditUser} from './components/admin';
 import { Routes } from './constants';
 import './App.css';
+import Error from './components/Error/error';
+
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <CustomAdminRoute exact path={Routes.ADMIN_USERS_ADD} component={AddUser} />
           <CustomAdminRoute exact path={Routes.ADMIN_USERS_VIEW+"/:user_id"} component={ViewUser} />
           <CustomAdminRoute exact path={Routes.ADMIN_USERS_EDIT+"/:user_id"} component={EditUser} />
+          <Route exact path={Routes.ERROR} component={Error} />
+          
         </Switch>  
     </Router>
   );

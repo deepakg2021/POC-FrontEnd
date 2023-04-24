@@ -4,13 +4,14 @@ import { AdminService } from "../../../services";
 import { Routes } from "../../../constants";
 // import Swal from "sweetalert2";
 import axios from "axios";
+import EditUser from "./EditUser";
 
 const UsersList = (props) => {
   const [error, setError] = useState(null);
 
 
 
-  const [userId, setUserId] = useState("");
+  const [crimeId, setCrimaId] = useState("");
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +20,7 @@ const UsersList = (props) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/user/view?_id=${userId}`
+        `http://localhost:5000/api/v1/user/view?_id=${crimeId}`
       );
       if (response.data.success) {
         setUserDetails(response.data);
@@ -56,8 +57,8 @@ const UsersList = (props) => {
                 <input
                   type="text"
                   id="userId"
-                  value={userId}
-                  onChange={(e) => setUserId(e.target.value)}
+                  value={crimeId}
+                  onChange={(e) => setCrimaId(e.target.value)}
                 />
 
                 <button type="submit">Enter Unique Crime ID</button>
@@ -66,7 +67,9 @@ const UsersList = (props) => {
               {loading && <p>Loading user details...</p>}
               {error && <p>Error fetching user details: {error}</p>}
               {userDetails && userDetails.data && (
+                
                 <div className="crime-form">
+                  {/* <button onClick={() => <EditUser  crimeId={userDetails.data._id}/>}>Edit Details</button> */}
                   <h2>Crime User Details</h2>
                   <p>Name: {userDetails.data.name}</p>
                   <p>Date of Birth: {userDetails.data.dateOfBirth}</p>

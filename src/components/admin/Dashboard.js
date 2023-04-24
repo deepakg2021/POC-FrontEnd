@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "../../constants";
+import { getAllCases } from "../../services/AdminService";
 
-const Dashboard = (props) => {
+const Dashboard = () => {
+  const [allCases, setAllCases] = useState();
+  const getCases = async () => {
+    const cases = await getAllCases();
+    console.log(cases.data, "cases");
+    const caseData = cases.data;
+    setAllCases(caseData);
+  };
+
+  useEffect(() => {
+    getCases();
+  }, []);
+
   return (
     <div>
       <section className="content-header">
@@ -25,9 +38,9 @@ const Dashboard = (props) => {
           <div className="col-lg-3 col-xs-6">
             <div className="small-box bg-blue">
               <div className="inner">
-                <h3>53</h3>
+                <h3>{allCases && allCases.length}</h3>
 
-                <p>New Cases</p>
+                <p>Case Registration</p>
               </div>
               <div className="icon">
                 <i className="ion ion-stats-bars"></i>
@@ -57,9 +70,9 @@ const Dashboard = (props) => {
           <div className="col-lg-3 col-xs-6">
             <div className="small-box bg-yellow">
               <div className="inner">
-                <h3>44</h3>
+                <h3>{allCases && allCases.length}</h3>
 
-                <p>Cases Registrations</p>
+                <p>Add Cases</p>
               </div>
               <div className="icon">
                 <i className="ion ion-person-add"></i>
@@ -73,7 +86,7 @@ const Dashboard = (props) => {
           <div className="col-lg-3 col-xs-6">
             <div className="small-box bg-red">
               <div className="inner">
-                <h3>65</h3>
+                <h3>7</h3>
 
                 <p>Unique Visitors</p>
               </div>

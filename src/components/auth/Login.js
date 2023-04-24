@@ -72,13 +72,13 @@ const Login = (props) => {
       return;
     } else {
       setPassError("");
-      await props.auth.userLogin({email:email, password:password, "q":"admin"});
+      await props.auth.userLogin({email:email, password:password, "role":"admin"});
     }
   };
 
   return (
     <div className="login-box-body">
-      <p className="login-box-msg">Sign in to start your session {props.auth.isLoggedIn ? 'Logged In' : 'Not Logged In'}</p>
+      <p className="login-box-msg">Sign in to Visit Your Dashboard</p>
 
       <form action="../../index2.html" method="post" onSubmit={handleSubmit}>
         <div className="form-group has-feedback">
@@ -121,32 +121,14 @@ const Login = (props) => {
 
         </div>
       </form>
-      <Link to={Routes.FORGOT_PASSWORD}>I forgot my password</Link>
-      <br />
-      <Link to={Routes.REGISTER}>Register a new membership</Link>
+      {/* <Link to={Routes.FORGOT_PASSWORD}>I forgot my password</Link>
+      <br /> */}
+      {/* <Link to={Routes.REGISTER}>Register a new membership</Link> */}
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//    return {
-//      auth:state.auth
-//    }
-// }
 
-// const mapDispatchToProps = (dispatch) => {
-//    return {
-//       customLogin:(data)=>{
-//         authModel.userLogin(data, dispatch);
-//       },
-//       customLogout:()=>{
-//         authModel.userLogout(dispatch);
-//       },
-//       cusomLayoutClass: (layoutClass) => {
-//         authModel.setLayoutClass(layoutClass, dispatch);
-//       }
-//    }
-// }
 
 
 

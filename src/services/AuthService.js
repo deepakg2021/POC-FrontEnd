@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../constants';
 
 export const Login = async (data) => { console.log("data", data);
     try{
-        const response = await axios.post(`${API_BASE_URL}/auth/login`, data, {headers:{"Content-Type":"application/json"}});
+        const response = await axios.post(`http://localhost:5000/api/v1/auth/login`, data, {headers:{"Content-Type":"application/json"}});
         if(response.status === 200) {
             return response.data;  
         } else {
