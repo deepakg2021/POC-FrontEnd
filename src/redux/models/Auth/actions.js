@@ -3,6 +3,7 @@ import { AuthService } from '../../../services';
 import { JWT } from '../../../shared';
 
 export const login = (data) => async(dispatch, getState) => { 
+    debugger;
      try{
          const response = await AuthService.Login(data);
          console.log("response is here", response)

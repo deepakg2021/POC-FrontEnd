@@ -28,17 +28,19 @@ const Header = (props) => {
   };
 
 
-  const userEmail = localStorage.getItem('email')
+  const userName = localStorage.getItem('userName')
   const history = useHistory();
 
   return (
     <React.Fragment>
       <header className="main-header">
         <NavLink to={Routes.ADMIN_OFFENDER} className="logo">
+        <img src="/assets/img/police1.png" className="img-circle" />
           <span className="logo-mini">
+              
           </span>
           <span className="logo-lg">
-            <b>POC</b>
+            
           </span>
         </NavLink>
 
@@ -46,6 +48,7 @@ const Header = (props) => {
           <button className="sidebar-toggle" onClick={handleToggle}>
             <span className="sr-only">Toggle navigation</span>
           </button>
+          <h2>I-Tek Information System</h2>
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
               <li
@@ -60,11 +63,11 @@ const Header = (props) => {
                   aria-expanded="true"
                 >
                   <img
-                    src="/assets/img/user2-160x160.jpg"
+                    src="/assets/img/avatar.png"
                     className="user-image"
                     alt="User Image"
                   />
-                  <span className="hidden-xs">{userEmail}</span>
+                  <span className="hidden-xs">{userName}</span>
                 </Link>
                 <ul className="dropdown-menu">
                   <li className="user-header">
@@ -75,7 +78,7 @@ const Header = (props) => {
                     />
 
                     <p>
-                      sourav Mishra - Mern Developer
+                      
                       <small>Member since Nov. 2021</small>
                     </p>
                   </li>
@@ -94,7 +97,7 @@ const Header = (props) => {
                           e.preventDefault();
                           props.auth.logout();
                           history.push(Routes.LOGIN);
-                          localStorage.setItem("email" , "")
+                          localStorage.setItem("userName" , "")
                           console.log("Logged out");
                         }}
                       >

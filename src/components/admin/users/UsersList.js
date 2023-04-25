@@ -10,8 +10,9 @@ const UsersList = (props) => {
   const [error, setError] = useState(null);
 
   const [crimeId, setCrimaId] = useState("");
-  const [userDetails, setUserDetails] = useState(null);
+  const [offenderDetails, setOffenderDetails] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,23 +22,25 @@ const UsersList = (props) => {
         `http://localhost:5000/api/v1/user/view?_id=${crimeId}`
       );
       if (response.data.success) {
-        setUserDetails(response.data);
+        setOffenderDetails(response.data);
+        setMessage("");
+        setError("");
       } else {
-        alert("Please Enter Correct Crime ID");
+        setMessage("No Record Found Please Add the record of Offender");
+        // alert("Please Enter Correct Crime ID");
+        setError("No record found....");
       }
     } catch (err) {
-      alert(err.message);
       setError(err.message);
     }
     setLoading(false);
   };
+  console.log(crimeId)
 
   return (
     <div>
       <div className="content content-wrapper">
-        <Link className="btn btn-success " to={Routes.ADMIN_OFFENDER_ADD}>
-          Add Offender
-        </Link>
+      
         <section className="content-header">
           <h1>
             Search Offender Data
@@ -62,13 +65,24 @@ const UsersList = (props) => {
               </div>
             </div>
           </section>
-          <div>
+          <div className="content text-center">
             {loading && <p>Loading user details...</p>}
-            {error && <p>Error fetching user details: {error}</p>}
-            {userDetails && userDetails.data && (
+            {message && (
+              <p><b> No Record Found </b></p>
+            )}
+            {error && (
+              <Link className="btn btn-success " to={Routes.ADMIN_OFFENDER_ADD}>
+                Add Offender
+              </Link>
+            )}
+
+            {offenderDetails && offenderDetails.data && (
               <div>
                 <section className="content-header">
                   <h1> Offender Details</h1>
+                  <Link to={Routes.ADMIN_USERS_EDIT + "/" + crimeId}>
+                    Alter Records
+                  </Link>
                 </section>
                 <section className="content">
                   <div className="row">
@@ -78,13 +92,13 @@ const UsersList = (props) => {
                           <img
                             className="profile-user-img img-responsive img-circle"
                             src="/assets/img/avatar5.png"
-                            alt="User profile picture"
+                            alt="profile"
                           />
                           <h3 className="profile-username text-center">
-                            {userDetails.data.name}
+                            {offenderDetails.data.name}
                           </h3>
                           <p className="text-muted text-center">
-                            {userDetails.data.offenceType}
+                            {offenderDetails.data.offenceType}
                           </p>
                         </div>
                       </div>
@@ -93,203 +107,230 @@ const UsersList = (props) => {
                       <div className="row">
                         <div className="col-md-5">
                           <div className="crime-form">
-                            {/* <button onClick={() => <EditUser  crimeId={userDetails.data._id}/>}>Edit Details</button> */}
+                            {/* <button onClick={() => <EditUser  crimeId={offenderDetails.data._id}/>}>Edit Details</button> */}
 
-                            <p>Name: {userDetails.data.name}</p>
-                            <p>Date of Birth: {userDetails.data.dateOfBirth}</p>
+                            <p>Name: {offenderDetails.data.name}</p>
+                            <p>
+                              Date of Birth: {offenderDetails.data.dateOfBirth}
+                            </p>
 
-                            <p>Sex: {userDetails.data.sex}</p>
+                            <p>Sex: {offenderDetails.data.sex}</p>
 
-                            <p>Height: {userDetails.data.height}</p>
+                            <p>Height: {offenderDetails.data.height}</p>
 
                             <p>
                               Driving License NO.:{" "}
-                              {userDetails.data.drivingLicenseNo}
+                              {offenderDetails.data.drivingLicenseNo}
                             </p>
 
-                            <p>PVC NO.: {userDetails.data.pvcNo}</p>
+                            <p>PVC NO.: {offenderDetails.data.pvcNo}</p>
 
-                            <p>NIN NO: {userDetails.data.ninNo}</p>
+                            <p>NIN NO: {offenderDetails.data.ninNo}</p>
                             <p>
-                              National ID NO.: {userDetails.data.nationalIdNo}
+                              National ID NO.:{" "}
+                              {offenderDetails.data.nationalIdNo}
                             </p>
 
-                            <p>Passport NO.: {userDetails.data.passportNo}</p>
+                            <p>
+                              Passport NO.: {offenderDetails.data.passportNo}
+                            </p>
                             <p>
                               Issuing Authority:{" "}
-                              {userDetails.data.issuingAuthority}
+                              {offenderDetails.data.issuingAuthority}
                             </p>
 
                             <p>
                               Vehicle RoadWorthiness No:{" "}
-                              {userDetails.data.vehicleRoadWorthinessNo}
+                              {offenderDetails.data.vehicleRoadWorthinessNo}
                             </p>
                             <p>
                               Vehicle RoadWorthiness Expiry Date:{" "}
-                              {userDetails.data.vehicleRoadWorthinessExpiryDate}
+                              {
+                                offenderDetails.data
+                                  .vehicleRoadWorthinessExpiryDate
+                              }
                             </p>
 
-                            <p>Chasis NO.: {userDetails.data.chassisNo}</p>
+                            <p>Chasis NO.: {offenderDetails.data.chassisNo}</p>
                             <p>
                               Arresting Officer Badge No:{" "}
-                              {userDetails.data.arrestingOfficerBadgeNo}
+                              {offenderDetails.data.arrestingOfficerBadgeNo}
                             </p>
 
                             <p>
                               Arresting Officers Name:{" "}
-                              {userDetails.data.arrestingOfficersName}
+                              {offenderDetails.data.arrestingOfficersName}
                             </p>
 
                             <p>
                               Arresting Agency:{" "}
-                              {userDetails.data.arrestingAgency}
+                              {offenderDetails.data.arrestingAgency}
                             </p>
 
                             <p>
                               Police Station Address:{" "}
-                              {userDetails.data.policeStationAddress}
+                              {offenderDetails.data.policeStationAddress}
                             </p>
 
                             <p>
                               Offender Statement:{" "}
-                              {userDetails.data.offenderStatement}
+                              {offenderDetails.data.offenderStatement}
                             </p>
 
                             <p>
                               Officers Station:{" "}
-                              {userDetails.data.officersStation}
+                              {offenderDetails.data.officersStation}
                             </p>
 
                             <p>
                               Properties In PoliceSafe:{" "}
-                              {userDetails.data.propertiesInPoliceSafe}
+                              {offenderDetails.data.propertiesInPoliceSafe}
                             </p>
                             <p>
-                              Police Safe No: {userDetails.data.policeSafeNo}
+                              Police Safe No:{" "}
+                              {offenderDetails.data.policeSafeNo}
                             </p>
 
                             <p>
                               PoliceReleaseDate:{" "}
-                              {userDetails.data.policeReleaseDate}
+                              {offenderDetails.data.policeReleaseDate}
                             </p>
 
-                            <p>BailDate: {userDetails.data.bailDate}</p>
+                            <p>BailDate: {offenderDetails.data.bailDate}</p>
 
                             <p>
-                              Guarantor Name: {userDetails.data.guarantorName}
+                              Guarantor Name:{" "}
+                              {offenderDetails.data.guarantorName}
                             </p>
 
-                            <p>DPO Name: {userDetails.data.dpoName}</p>
+                            <p>DPO Name: {offenderDetails.data.dpoName}</p>
 
-                            <p>CID Name: {userDetails.data.cidName}</p>
+                            <p>CID Name: {offenderDetails.data.cidName}</p>
 
                             <p>
-                              CID Statement: {userDetails.data.cidStatement}
+                              CID Statement: {offenderDetails.data.cidStatement}
                             </p>
                             <p>
                               Solicitor Or Lawyer Name:{" "}
-                              {userDetails.data.solicitorOrLawyerName}
+                              {offenderDetails.data.solicitorOrLawyerName}
                             </p>
 
                             <p>
                               Solicitor Or Lawyer Address:{" "}
-                              {userDetails.data.solicitorOrLawyerAddress}
+                              {offenderDetails.data.solicitorOrLawyerAddress}
                             </p>
 
                             <p>
                               Solicitor Or Lawyer Contact Details:{" "}
-                              {userDetails.data.solicitorOrLawyerContactDetails}
+                              {
+                                offenderDetails.data
+                                  .solicitorOrLawyerContactDetails
+                              }
                             </p>
 
-                            <p>Court Date: {userDetails.data.courtDate}</p>
+                            <p>Court Date: {offenderDetails.data.courtDate}</p>
 
                             <p>
-                              Court Address: {userDetails.data.courtAddress}
+                              Court Address: {offenderDetails.data.courtAddress}
                             </p>
 
                             <p>
                               Judgment Or Sentencing Or Fine:{" "}
-                              {userDetails.data.judgmentOrSentencingOrFine}
+                              {offenderDetails.data.judgmentOrSentencingOrFine}
                             </p>
 
-                            <p>Judge Name: {userDetails.data.judgeName}</p>
+                            <p>Judge Name: {offenderDetails.data.judgeName}</p>
 
                             <p>
                               Properties In PrisonSafe:{" "}
-                              {userDetails.data.propertiesInPrisonSafe}
+                              {offenderDetails.data.propertiesInPrisonSafe}
                             </p>
 
                             <p>
-                              Prison Safe No: {userDetails.data.prisonSafeNo}
+                              Prison Safe No:{" "}
+                              {offenderDetails.data.prisonSafeNo}
                             </p>
 
-                            <p>Jail Date: {userDetails.data.jailDate}</p>
+                            <p>Jail Date: {offenderDetails.data.jailDate}</p>
 
                             <p>
-                              Prison Address: {userDetails.data.prisonAddress}
+                              Prison Address:{" "}
+                              {offenderDetails.data.prisonAddress}
                             </p>
-                            <p>Prisoner No: {userDetails.data.prisonerNo}</p>
+                            <p>
+                              Prisoner No: {offenderDetails.data.prisonerNo}
+                            </p>
                             <p>
                               Prison Release Date:{" "}
-                              {userDetails.data.prisonReleaseDate}
+                              {offenderDetails.data.prisonReleaseDate}
                             </p>
                           </div>
                         </div>
                         <div className="col-md-5">
                           <div className="crime-form">
-                            {/* <button onClick={() => <EditUser  crimeId={userDetails.data._id}/>}>Edit Details</button> */}
+                            {/* <button onClick={() => <EditUser  crimeId={offenderDetails.data._id}/>}>Edit Details</button> */}
 
-                            <p>Nationality: {userDetails.data.nationality}</p>
+                            <p>
+                              Nationality: {offenderDetails.data.nationality}
+                            </p>
 
-                            <p>Address: {userDetails.data.address}</p>
+                            <p>Address: {offenderDetails.data.address}</p>
 
-                            <p>City: {userDetails.data.city}</p>
+                            <p>City: {offenderDetails.data.city}</p>
 
-                            <p>State: {userDetails.data.state}</p>
+                            <p>State: {offenderDetails.data.state}</p>
 
-                            <p>Telephone No: {userDetails.data.telephoneNo}</p>
+                            <p>
+                              Telephone No: {offenderDetails.data.telephoneNo}
+                            </p>
 
                             <p>
                               Injury Or Disability:{" "}
-                              {userDetails.data.injuryOrDisability}
+                              {offenderDetails.data.injuryOrDisability}
                             </p>
 
                             <p>
-                              Date Of Offence: {userDetails.data.dateOfOffence}
+                              Date Of Offence:{" "}
+                              {offenderDetails.data.dateOfOffence}
                             </p>
 
                             <p>
-                              Time Of Offence: {userDetails.data.timeOfOffence}
+                              Time Of Offence:{" "}
+                              {offenderDetails.data.timeOfOffence}
                             </p>
 
                             <p>
                               Location Of Offence:{" "}
-                              {userDetails.data.locationOfOffence}
+                              {offenderDetails.data.locationOfOffence}
                             </p>
 
-                            <p>Offence Type: {userDetails.data.offenceType}</p>
+                            <p>
+                              Offence Type: {offenderDetails.data.offenceType}
+                            </p>
 
                             <p>
                               Penalties Or Fine:{" "}
-                              {userDetails.data.penaltiesOrFine}
+                              {offenderDetails.data.penaltiesOrFine}
                             </p>
 
-                            <p>Type Of Car: {userDetails.data.typeOfCar}</p>
+                            <p>Type Of Car: {offenderDetails.data.typeOfCar}</p>
                             <p>
                               Car Registration:{" "}
-                              {userDetails.data.carRegistration}
+                              {offenderDetails.data.carRegistration}
                             </p>
 
-                            <p>Car Colour: {userDetails.data.carColour}</p>
+                            <p>Car Colour: {offenderDetails.data.carColour}</p>
 
                             <p>
                               Name Of Insurance:{" "}
-                              {userDetails.data.nameOfInsurance}
+                              {offenderDetails.data.nameOfInsurance}
                             </p>
 
-                            <p>INS NO.: {userDetails.data.insNo}</p>
+                            <p>INS NO.: {offenderDetails.data.insNo}</p>
 
-                            <p>Expiry Date: {userDetails.data.expiryDate}</p>
+                            <p>
+                              Expiry Date: {offenderDetails.data.expiryDate}
+                            </p>
                           </div>
                         </div>
                       </div>

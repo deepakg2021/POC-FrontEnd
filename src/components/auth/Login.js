@@ -73,8 +73,8 @@ const Login = (props) => {
     } else {
       setPassError("");
       const loginDetails = await props.auth.userLogin({email:email, password:password, "role":"admin"});
-      console.log(loginDetails.data.email)
-      localStorage.setItem("email", loginDetails.data.email);
+      console.log(loginDetails.data.userName)
+      localStorage.setItem("userName", loginDetails.data.userName);
     }
   };
 

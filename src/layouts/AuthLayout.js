@@ -13,7 +13,7 @@ const AuthLayout = props => {
     return (
         <div className={"login-box "+props.auth.authLayoutClass}>
             <div className="login-logo">
-                <Link to={"/"}><b>Admin</b>LTE</Link>
+                <Link to={"/"}><b>I-Tek Information</b></Link>
             </div>
                {props.children}
          </div>

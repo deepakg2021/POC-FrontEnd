@@ -84,7 +84,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="col-lg-3 col-xs-6">
+         {/* <div className="col-lg-3 col-xs-6">
             <div className="small-box bg-red">
               <div className="inner">
                 <h3>7</h3>
@@ -99,6 +99,7 @@ const Dashboard = () => {
               </Link>
             </div>
           </div>
+  */ }
         </div>
       </section>
     </div>

@@ -7,14 +7,14 @@ import { injectModels } from '../../redux/injectModels';
 
 const Sidebar = (props) => {
 
-  const [email,setEmail] = useState();
+  const [userName,setUserName] = useState();
 
-  const userEmail = () =>{
-   setEmail(localStorage.getItem('email'))
+  const getUserName = () =>{
+    setUserName(localStorage.getItem('userName'))
   }
 
   useEffect(() => {
-    userEmail()
+    getUserName()
   },[])
 
     return (
@@ -22,10 +22,10 @@ const Sidebar = (props) => {
         <section className="sidebar">
           <div className="user-panel">
             <div className="pull-left image">
-              <img src="/assets/img/user2-160x160.jpg" className="img-circle" alt="User Image"/>
+              <img src="/assets/img/avatar.png" className="img-circle" alt="User Image"/>
             </div>
             <div className="pull-left info">
-              <p>{email}</p>
+              <p>{userName}</p>
               <a href="/#"><i className="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
